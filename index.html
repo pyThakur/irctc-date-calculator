@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>60 Days Before Travel Date</title>
+  <link rel="icon" href="banana.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-light: #f0f2f5;
+      --bg-dark: #121212;
+      --container-bg-light: rgba(255, 255, 255, 0.4);
+      --container-bg-dark: rgba(0, 0, 0, 0.4);
+      --text-light: #222;
+      --text-dark: #eee;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+      backdrop-filter: blur(2px);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1 {
+      color: white;
+      text-shadow: 1px 1px 3px #000;
+      margin-top: 40px;
+      text-align: center;
+      padding: 0 15px;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .container,
+    .about-section {
+      background-color: var(--container-bg-light);
+      color: var(--text-light);
+      padding: 25px 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      margin: 20px auto;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: fadeInUp 1.2s ease both;
+    }
+
+    input[type="date"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .dark-mode .container,
+    .dark-mode .about-section {
+      background-color: var(--container-bg-dark);
+      color: var(--text-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .toggle-container {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+    }
+
+    .toggle-container button {
+      padding: 6px 12px;
+      font-size: 14px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-container button:hover {
+      background-color: #555;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 22px;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .container,
+      .about-section {
+        padding: 20px 15px;
+      }
+    }
+    .social-links {
+      text-align: center;
+      margin: 30px 0;
+    }
+    
+    .social-links a {
+      text-decoration: none;
+      font-size: 26px;
+      margin: 0 15px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      transform: scale(1.2);
+      background-color: rgba(255, 255, 255, 0.6);
+      color: #000;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="toggle-container">
+    <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  </div>
+
+  <h1>🗓️ IRCTC TICKET DATE CALCULATOR</h1>
+
+  <div class="container">
+    <P>Calculate when you can start booking <u>IRCTC</u> ticket for any travel date,add the booking date to your favourite calender  and get notified on the booking day.</P>
+    <label for="travelDate">Select your travel date:</label>
+    <input type="date" id="travelDate">
+    <button onclick="calculateReminderDate()">Calculate</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <div class="about-section">
+    <h3>📝 About this website:</h3>
+    <p>
+      This website is developed with a focus on simplicity, responsiveness, and user experience.
+      Built using HTML, CSS, JavaScript, the goal is to provide a smooth ticket booking utility with intuitive data handling features.
+    </p>
+  </div>
+  <div class="about-section">
+    <h3>📝 About Developer:</h3>
+    <p>
+      I'm passionate developer who enjoys building clean and practicle web applications.
+      Wheater you're looking for improvements, collaborations, or new ideas - I'm always open to connect.
+      <p>FELL FREE TO CONTACT ME USING THE LINKS BELOW</p> 
+    </p>
+  </div>
+  <div class="social-links">
+    <a href="https://www.facebook.com/purshootam.thakur" target="_blank" title="Facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://www.twitter.com/Purushotam1770" target="_blank" title="Twitter">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://www.instagram.com/purushotam.__.thakur" target="_blank" title="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/purushotam-thakur-b01b122b9/" target="_blank" title="LinkedIn">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="https://www.github.com/pyThakur" target="_blank" title="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </div>
+  
+  
+
+  <script>
+    function calculateReminderDate() {
+      const input = document.getElementById('travelDate').value;
+      const resultDiv = document.getElementById('result');
+
+      if (!input) {
+        resultDiv.textContent = 'Please select a travel date.';
+        return;
+      }
+
+      const travelDate = new Date(input);
+      travelDate.setDate(travelDate.getDate() - 60);
+
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const reminderDate = travelDate.toLocaleDateString(undefined, options);
+
+      resultDiv.textContent = `📅 You should prepare by: ${reminderDate}`;
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+
+</body>
+</html>
